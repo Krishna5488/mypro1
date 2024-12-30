@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import pymysql
+pymysql.install_as_MySQLdb()
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,11 +41,14 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app1',
     'whitenoise',
+    'corsheaders',
     
 ]
+CORS_ALLOW_ALL_ORIGINS = True
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -77,11 +82,15 @@ WSGI_APPLICATION = 'mypro1.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
+# 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',  # Database name from the URL
+        'USER': 'root',  # Username from the URL
+        'PASSWORD': 'KABIWHeMkNMgmuccfTOOmhoxKcAWiyQB',  # Password from the URL
+        'HOST': 'autorack.proxy.rlwy.net',  # Host from the URL
+        'PORT': '29713',  # Port from the URL
     }
 }
 
